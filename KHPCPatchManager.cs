@@ -209,17 +209,16 @@ public class KHPCPatchManager{
 		bool extract_raw = false;
 		bool nobackup = false;
 		bool extractPatch = false;
-		string hedFile = null, pkgFile = null, pkgFolder = null;
+		string hedFile = null, pkgFile = null, pkgFolder = null, khPath = null;
 		List<string> originFolder = new List<string>();
 		List<string> patchFolders = new List<string>();
 		bool help = false;
 		try{
 			for(int i=0;i<args.Length;i++){
-				if(Path.GetExtension(args[i]) == ".hed"){
-					hedFile = args[i];
-				}else if(Path.GetExtension(args[i]) == ".pkg"){
-					pkgFile = args[i];
+				if(args[i].Contains("KH_1.5_2.5")){
+					khPath = args[i];
 				}else if(Directory.Exists(args[i])){
+					
 					pkgFolder = args[i];
 					patchFolders.Add(args[i]);
 				}else if(Path.GetExtension(args[i]) == ".kh1pcpatch"){
@@ -281,7 +280,7 @@ public class KHPCPatchManager{
 				Console.WriteLine("Done!");
 			}else if(originFolder.Count > 0){
 				if(patchType.Distinct().ToList().Count == 1){
-					ApplyPatch(originFolder, patchType[0], null, !nobackup, extractPatch);
+					ApplyPatch(originFolder, patchType[0], khPath, !nobackup, extractPatch);
 				}else{
 					Console.WriteLine(multiplePatchTypesSelected);
 				}
@@ -323,10 +322,7 @@ public class KHPCPatchManager{
 	public static List<ZipFile> ZipFiles;
 	static void ApplyPatch(List<string> patchFile, string patchType, string epicFolder = null, bool backupPKG = true, bool extractPatch = false){
 		Console.WriteLine("Applying " + patchType + " patch...");
-		if(epicFolder == null){
-			epicFolder = @"C:\Program Files\Epic Games\KH_1.5_2.5\Image\en\";
-			if(patchType == "DDD") epicFolder = null;
-		}
+
 		while(!Directory.Exists(epicFolder)){
 			if (patchType == "KH1" || patchType == "KH2" || patchType == "BBS"|| patchType == "COM") {
 				Console.WriteLine("If you want to patch KH1, KH2, Recom or BBS, please drag your \"en\" folder (the one that contains kh1_first, kh1_second, etc.) located under \"Kingdom Hearts HD 1 5 and 2 5 ReMIX/Image/\" here, and press Enter:");
