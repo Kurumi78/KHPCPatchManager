@@ -1,5 +1,10 @@
 # KHPCPatchManager
 
+## DISCLAIMER
+This is a modified version of KHPCPatchManager which allows setting the KH folder in the command for launching the program. This breaks some other functionality.
+This is inteded solely to be used with an automated script to install KHRefined 4.0 and newer on Linux.
+
+
 ## How to apply a patch:
 1. Download the [latest release](https://github.com/AntonioDePau/KHPCPatchManager/releases) or compile the binary yourself
 2. Make sure you have a "resources" folder (in the same directory as the tool) with all the .txt containing the files' names (you can get one along with a release)
